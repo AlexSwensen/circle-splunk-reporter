@@ -1,0 +1,7 @@
+{
+    "editor.formatOnSave": true,
+    "prettier.packageManager": "yarn",
+    "eslint.packageManager": "yarn",
+    "npm.packageManager": "yarn",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
