@@ -1,5 +1,4 @@
 #!/usr/bin/env node
 
-import fetch from "node-fetch";
-
-fetch("");
+const splunkURL = process.env.SPLUNK_URL;
+const splunkToken = process.env.SPLUNK_TOKEN as string;
