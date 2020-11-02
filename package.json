@@ -1,8 +1,8 @@
 {
   "name": "@alexswensen/circle-splunk-reporter",
-  "version": "0.0.2-alpha",
+  "version": "0.0.2-beta",
   "description": "A package to report statistics about circle jobs to splunk.",
-  "main": "./dist/index.ts",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "start": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
