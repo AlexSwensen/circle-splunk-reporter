@@ -6,11 +6,11 @@ export class SplunkSender {
   private _logger: Logger;
   constructor({
     /**
-     * url
+     * splunk url
      */
     url,
     token,
-    ssl,
+    ssl = true,
   }: {
     url: string;
     token: string;
@@ -28,18 +28,23 @@ export class SplunkSender {
   }
 
   public send = (
-    { name, data, index }: { name: string; data: any; index: string },
+    { name, data, index }: { name: string; data: any; index?: string },
     callback: Callback
   ) => {
     const payload: SendContext = {
       message: {
         name,
-        ...data,
-      },
-      metadata: {
-        index: index,
+        data: data,
       },
     };
+
+    if (index && index.length) {
+      const metadata = {
+        index: index,
+      };
+
+      payload.metadata = metadata;
+    }
     this._logger.send(payload, callback);
   };
 }
