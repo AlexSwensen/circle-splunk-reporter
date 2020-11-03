@@ -1,4 +1,5 @@
 export enum CircleStatus {
+  running = "running",
   success = "success",
   failed = "failed",
   error = "error",
@@ -7,6 +8,7 @@ export enum CircleStatus {
 }
 
 export enum WorkflowStatus {
+  running = "running",
   success = "success",
   failed = "failed",
   error = "error",
