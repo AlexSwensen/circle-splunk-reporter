@@ -3,6 +3,8 @@ import chalk from "chalk";
 import fetch, { RequestInit } from "node-fetch";
 import { SplunkSender } from "./SplunkSender";
 import yargs from "yargs";
+import { ICircleCIJob } from "./types";
+import { DateTime } from "luxon";
 
 const argv = yargs(process.argv.slice(2))
   .scriptName("metrics-to-splunk")
@@ -41,11 +43,14 @@ if (!name) {
 }
 
 async function main() {
-  const currentTime = new Date();
-
   const splunkURL = process.env.SPLUNK_URL as string;
   const splunkToken = process.env.SPLUNK_TOKEN as string;
-  const result = await (await fetchCircleBuildStats()).json();
+  const result = (await (await fetchCircleBuildStats()).json()) as ICircleCIJob;
+
+  const currentTime = DateTime.local();
+  const startedTime = DateTime.fromISO(result.started_at);
+  const duration = currentTime.diff(startedTime);
+  const durationVal = duration.as("milliseconds");
 
   try {
     const logger = new SplunkSender({
@@ -58,14 +63,15 @@ async function main() {
       name: name as string,
       data: {
         circleJob: result,
-        currentTime: currentTime.toISOString(),
+        currentTime: currentTime.toISO(),
+        duration: durationVal,
       },
       index: index as string,
     };
 
     console.log("Sending to spunk...");
 
-    console.log(payload);
+    console.log(JSON.stringify(payload));
 
     logger.send(payload, () => {});
   } catch (err) {
