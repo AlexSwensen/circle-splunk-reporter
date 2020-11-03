@@ -1,4 +1,6 @@
 # circle-splunk-reporter
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter?ref=badge_shield)
+
 
 A package to report statistics about circle jobs to splunk.
 
@@ -31,3 +33,6 @@ example usage in circle config.yml
     environment:
       SPLUNK_URL: <splunk-url:port>
 ```
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter?ref=badge_large)
