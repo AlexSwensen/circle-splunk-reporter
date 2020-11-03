@@ -1,4 +1,6 @@
 # circle-splunk-reporter
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter?ref=badge_shield)
+
 
 A package to report statistics about circle jobs to splunk.
 
@@ -17,3 +19,7 @@ In order to use:
 ```bash
 $ npx @alexswensen/circle-splunk-reporter --name "event name" --index "splunk-index"
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter?ref=badge_large)
