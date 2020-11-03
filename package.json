@@ -1,6 +1,6 @@
 {
   "name": "@alexswensen/circle-splunk-reporter",
-  "version": "0.0.4-alpha",
+  "version": "1.0.1",
   "description": "A package to report statistics about circle jobs to splunk.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/AlexSwensen/circle-splunk-reporter#readme",
   "devDependencies": {
     "@types/jest": "^26.0.15",
+    "@types/luxon": "^1.25.0",
     "@types/node": "^14.14.6",
     "@types/node-fetch": "^2.5.7",
     "@types/splunk-logging": "^0.9.1",
@@ -38,6 +39,7 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
+    "luxon": "^1.25.0",
     "node-fetch": "^2.6.1",
     "splunk-logging": "^0.10.1",
     "yargs": "^16.1.0"

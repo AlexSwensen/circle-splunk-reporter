@@ -20,6 +20,19 @@ In order to use:
 $ npx @alexswensen/circle-splunk-reporter --name "event name" --index "splunk-index"
 ```
 
+example usage in circle config.yml
+
+```yaml
+- run:
+    name: record metrics to splunk
+    command: CIRCLE_TOKEN=$CIRCLECI_TOKEN
+      SPLUNK_TOKEN=$MY_SPLUNK_TOKEN npx
+      @alexswensen/circle-splunk-reporter --name
+      "circle-metrics-hello" --index "my-index"
+    when: always
+    environment:
+      SPLUNK_URL: <splunk-url:port>
+```
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FAlexSwensen%2Fcircle-splunk-reporter?ref=badge_large)
