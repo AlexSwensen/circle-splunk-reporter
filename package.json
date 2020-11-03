@@ -1,6 +1,6 @@
 {
   "name": "@alexswensen/circle-splunk-reporter",
-  "version": "0.0.4-alpha",
+  "version": "1.0.0",
   "description": "A package to report statistics about circle jobs to splunk.",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
