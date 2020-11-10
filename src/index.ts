@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import chalk from "chalk";
-import fetch, { RequestInit } from "node-fetch";
+import Circle from "@alexswensen/circleci-api";
 import { SplunkSender } from "./SplunkSender";
 import yargs from "yargs";
 import { ICircleCIJob } from "./types";
 import { DateTime } from "luxon";
+import { VCSProvider } from "@alexswensen/circleci-api/dist/utils/vcs";
 
 const argv = yargs(process.argv.slice(2))
   .scriptName("metrics-to-splunk")
@@ -79,36 +80,34 @@ async function main() {
   }
 }
 
-export async function fetchCircleBuildStats() {
+export async function fetchCircleBuildStats(): Promise<Response> {
   /**
    * All of these are already available in a CircleCI build.
    */
   const repoURL = process.env.CIRCLE_REPOSITORY_URL as string;
-  const circleProjectUsername = process.env.CIRCLE_PROJECT_USERNAME;
+  const circleProjectUsername = process.env.CIRCLE_PROJECT_USERNAME as string;
   const circleProjectReponame = process.env.CIRCLE_PROJECT_REPONAME;
-  const jobNumber = process.env.CIRCLE_BUILD_NUM;
+  const jobNumber = process.env.CIRCLE_BUILD_NUM as string;
 
-  let VCSProvider: "gh" | "bb";
+  const circleToken = process.env.CIRCLE_TOKEN as string;
+
+  let vcs;
 
   // determine if this is a github or bitbucket repo
   if (repoURL?.includes("github")) {
-    VCSProvider = "gh";
+    vcs = VCSProvider.github;
   } else {
-    VCSProvider = "bb";
+    vcs = VCSProvider.bitbucket;
   }
 
-  const projectSlug = `${VCSProvider}/${circleProjectUsername}/${circleProjectReponame}`;
+  const circle = Circle.init({
+    token: circleToken,
+    orgName: circleProjectUsername,
+    repoName: circleProjectReponame,
+    vcs: vcs,
+  });
 
-  var requestOptions: RequestInit = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  const circleToken = process.env.CIRCLE_TOKEN;
-
-  const url = `https://circleci.com/api/v2/project/${projectSlug}/job/${jobNumber}?circle-token=${circleToken}`;
-
-  const result = await fetch(url, requestOptions);
+  const result = await circle.job.get(parseInt(jobNumber));
   return result;
 }
 
