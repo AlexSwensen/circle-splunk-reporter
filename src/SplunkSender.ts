@@ -10,11 +10,11 @@ export class SplunkSender {
      */
     url,
     token,
-    ssl = true,
+    loggerOptions,
   }: {
     url: string;
     token: string;
-    ssl?: boolean;
+    loggerOptions?: Logger["requestOptions"];
   }) {
     this.url = url;
     this.token = token;
@@ -22,8 +22,9 @@ export class SplunkSender {
       token: this.token,
       url: this.url,
     });
-    if (ssl) {
-      this._logger.requestOptions.strictSSL = ssl;
+
+    if (loggerOptions) {
+      this._logger.requestOptions = loggerOptions;
     }
   }
 
