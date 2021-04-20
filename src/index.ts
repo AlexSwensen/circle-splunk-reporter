@@ -57,7 +57,10 @@ async function main() {
     const logger = new SplunkSender({
       url: splunkURL,
       token: splunkToken,
-      ssl: true,
+      loggerOptions: {
+        strictSSL: true,
+        timeout: 15, // in seconds
+      },
     });
 
     const payload = {
